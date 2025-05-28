@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Donor Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <script src="script.js"></script>
+
+  <style>
+    body {
+      background: #f8f9fa;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    nav.navbar {
+      box-shadow: 0 4px 10px rgb(0 0 0 / 0.1);
+      transition: background-color 0.3s ease;
+    }
+    nav.navbar .navbar-brand {
+      font-size: 1.6rem;
+      letter-spacing: 0.05em;
+      user-select: none;
+    }
+    nav.navbar .btn-logout {
+      border-radius: 30px;
+      font-weight: 600;
+      padding: 6px 18px;
+      transition: background-color 0.3s ease;
+    }
+    nav.navbar .btn-logout:hover {
+      background-color: #b02a37;
+      color: white;
+    }
+    .container {
+      max-width: 900px;
+    }
+    h4.text-danger {
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+    .info-box {
+      background: white;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 10px 25px rgb(0 0 0 / 0.07);
+      margin-bottom: 40px;
+      animation: fadeInUp 0.6s ease forwards;
+    }
+    .info-box p {
+      font-size: 1rem;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #444;
+    }
+    .nav-tabs {
+      border-bottom: 2px solid #e3342f;
+    }
+    .nav-tabs .nav-link.active {
+      background-color: #e3342f;
+      color: white !important;
+      border-radius: 12px 12px 0 0;
+      font-weight: 600;
+      box-shadow: 0 4px 10px rgb(227 52 47 / 0.4);
+    }
+    .card {
+      border-radius: 12px;
+      box-shadow: 0 15px 30px rgb(0 0 0 / 0.1);
+      transition: transform 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 40px rgb(0 0 0 / 0.15);
+    }
+    .btn-danger {
+      border-radius: 30px;
+      font-weight: 700;
+      padding: 10px 24px;
+      transition: background-color 0.3s ease;
+    }
+    .btn-danger:hover {
+      background-color: #b02a37;
+    }
+    input.form-control, select.form-select, textarea.form-control {
+      border-radius: 10px;
+      border: 1.5px solid #ddd;
+      transition: border-color 0.3s ease;
+    }
+    input.form-control:focus, select.form-select:focus, textarea.form-control:focus {
+      border-color: #e3342f;
+      box-shadow: 0 0 8px rgba(227, 52, 47, 0.3);
+    }
+    label {
+      font-weight: 600;
+      color: #555;
+    }
+    #submittedForms {
+      max-height: 280px;
+      overflow-y: auto;
+    }
+    .submitted-form {
+      background: #fff5f5;
+      border: 1.5px solid #e3342f;
+      border-radius: 12px;
+      padding: 15px 20px;
+      margin-bottom: 15px;
+      font-size: 0.95rem;
+      color: #7f1d1d;
+      box-shadow: 0 4px 10px rgb(227 52 47 / 0.1);
+      animation: fadeInRight 0.6s ease forwards;
+    }
+    /* Animations */
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes fadeInRight {
+      0% {
+        opacity: 0;
+        transform: translateX(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+  <div class="container d-flex justify-content-between align-items-center">
+    <a class="navbar-brand text-danger fw-bold" href="#">🩸 Donor Dashboard</a>
+    <button class="btn btn-outline-danger btn-logout" id="logoutBtn">Logout</button>
+  </div>
+</nav>
+
+<!-- Main Container -->
+<div class="container" style="padding-top: 100px; padding-bottom: 50px;">
+  <div class="info-box">
+    <h4 class="text-danger mb-3">Welcome, <span id="donorName">Donor</span></h4>
+    <p><strong>Email:</strong> <span id="donorEmail"></span></p>
+    <p><strong>City:</strong> <span id="donorCity"></span></p>
+    <p><strong>State:</strong> <span id="donorState"></span></p>
+  </div>
+
+  <!-- Tabs -->
+  <ul class="nav nav-tabs mb-4" id="donationTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="blood-tab" data-bs-toggle="tab" data-bs-target="#blood" type="button" role="tab">Blood Donation</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="organ-tab" data-bs-toggle="tab" data-bs-target="#organ" type="button" role="tab">Organ Donation</button>
+    </li>
+  </ul>
+
+  <!-- Tab Contents -->
+  <div class="tab-content" id="donationTabContent">
+
+    <!-- Blood Donation Form -->
+    <div class="tab-pane fade show active" id="blood" role="tabpanel" aria-labelledby="blood-tab">
+      <div class="card p-4 mb-5">
+        <h5 class="text-danger mb-4">Blood Donation Form</h5>
+        <form id="bloodForm" autocomplete="off">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <input type="text" name="name" class="form-control" placeholder="Full Name" required />
+            </div>
+            <div class="col-md-6">
+              <input type="text" name="address" class="form-control" placeholder="Address" required />
+            </div>
+            <div class="col-md-6">
+              <input type="date" name="dob" class="form-control" required />
+            </div>
+            <div class="col-md-6">
+              <input type="tel" name="phone" class="form-control" placeholder="Phone Number" required />
+            </div>
+            <div class="col-md-6">
+              <input type="text" name="medications" class="form-control" placeholder="Medications (if any)" />
+            </div>
+            <div class="col-md-6">
+              <input type="text" name="disease" class="form-control" placeholder="Diseases (if any)" />
+            </div>
+            <div class="col-md-6">
+              <select name="bloodGroup" class="form-select" required>
+                <option value="">Blood Group</option>
+                <option>A+</option><option>A-</option><option>B+</option><option>B-</option>
+                <option>AB+</option><option>AB-</option><option>O+</option><option>O-</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <input type="date" name="lastDonation" class="form-control" placeholder="Last Donation Date" />
+            </div>
+          </div>
+          <button type="submit" class="btn btn-danger mt-4">Submit Blood Donation</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Organ Donation Form -->
+    <div class="tab-pane fade" id="organ" role="tabpanel" aria-labelledby="organ-tab">
+      <div class="card p-4 mb-5">
+        <h5 class="text-danger mb-4">Organ Donation Form</h5>
+        <form id="organForm" autocomplete="off">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <input type="text" name="name" class="form-control" placeholder="Full Name" required />
+            </div>
+            <div class="col-md-6">
+              <input type="text" name="address" class="form-control" placeholder="Address" required />
+            </div>
+            <div class="col-md-6">
+              <input type="date" name="dob" class="form-control" required />
+            </div>
+            <div class="col-md-6">
+              <input type="tel" name="phone" class="form-control" placeholder="Phone Number" required />
+            </div>
+            <div class="col-md-6">
+              <input type="text" name="medications" class="form-control" placeholder="Medications (if any)" />
+            </div>
+            <div class="col-md-6">
+              <input type="text" name="disease" class="form-control" placeholder="Diseases (if any)" />
+            </div>
+            <div class="col-md-12">
+              <label class="form-label fw-semibold">Select Organs You Wish to Donate:</label><br/>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="organs" value="Kidney" id="kidneyCheck"/>
+                <label class="form-check-label" for="kidneyCheck">Kidney</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="organs" value="Liver" id="liverCheck"/>
+                <label class="form-check-label" for="liverCheck">Liver</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="organs" value="Heart" id="heartCheck"/>
+                <label class="form-check-label" for="heartCheck">Heart</label>
+              </div>
+              <!-- Add more as needed -->
+            </div>
+            <div class="col-md-12">
+              <textarea class="form-control" name="notes" rows="3" placeholder="Any other medical details or conditions?"></textarea>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-danger mt-4">Submit Organ Donation</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Submitted Donations -->
+  <div class="card p-4 shadow-sm">
+    <h5 class="text-danger mb-3">Your Submitted Donation Forms</h5>
+    <div id="submittedForms">
+      <!-- Dynamically inserted forms -->
+      <p class="text-muted fst-italic">No submissions yet.</p>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+//   // Sample donor info - replace with real data from backend
+//   const donor = JSON.parse(localStorage.getItem('donorData') || '{}');
+// const API = 'http://localhost:3000/api/donation';
+
+// document.addEventListener("DOMContentLoaded", () => {
+//   // Show donor info in donor.html
+//   if (document.getElementById('donorName')) {
+//     document.getElementById('donorName').innerText = donor.name || 'Donor';
+//     document.getElementById('donorEmail').innerText = donor.email || 'N/A';
+//     document.getElementById('donorCity').innerText = donor.city || 'N/A';
+//     document.getElementById('donorState').innerText = donor.state || 'N/A';
+//     loadSubmittedForms();
+//   }
+
+//   // Blood donation form submit
+//   const bloodForm = document.getElementById('bloodForm');
+//   if (bloodForm) {
+//     bloodForm.addEventListener('submit', async function (e) {
+//       e.preventDefault();
+//       const formData = Object.fromEntries(new FormData(this));
+//       const payload = {
+//         donorEmail: donor.email,
+//         type: 'Blood',
+//         formData
+//       };
+//       const success = await submitDonation(payload);
+//       if(success) this.reset();
+//     });
+//   }
+
+//   // Organ donation form submit
+//   const organForm = document.getElementById('organForm');
+//   if (organForm) {
+//     organForm.addEventListener('submit', async function (e) {
+//       e.preventDefault();
+//       const formData = Object.fromEntries(new FormData(this));
+//       // Gather checked organs as array
+//       formData.organs = Array.from(this.querySelectorAll('input[name="organs"]:checked')).map(cb => cb.value);
+//       const payload = {
+//         donorEmail: donor.email,
+//         type: 'Organ',
+//         formData
+//       };
+//       const success = await submitDonation(payload);
+//       if(success) this.reset();
+//     });
+//   }
+
+//   // Logout button
+//   document.getElementById('logoutBtn').addEventListener('click', () => {
+//     localStorage.removeItem('donorData');
+//     window.location.href = 'index.html';
+//   });
+// });
+
+// // Submit donation form data to backend
+// async function submitDonation(payload) {
+//   try {
+//     const res = await fetch(API, {
+//       method: 'POST',
+//       headers: { 'Content-Type': 'application/json' },
+//       body: JSON.stringify(payload),
+//     });
+//     const data = await res.json();
+//     if(res.ok) {
+//       alert('Donation form submitted successfully!');
+//       loadSubmittedForms();
+//       return true;
+//     } else {
+//       alert('Error submitting form: ' + (data.message || 'Unknown error'));
+//       return false;
+//     }
+//   } catch (err) {
+//     alert('Network error. Please try again.');
+//     return false;
+//   }
+// }
+
+// // Load and show submitted donation forms by this donor
+// async function loadSubmittedForms() {
+//   try {
+//     const res = await fetch(`${API}?donorEmail=${encodeURIComponent(donor.email)}`);
+//     if (!res.ok) throw new Error('Failed to fetch submissions');
+//     const submissions = await res.json();
+
+//     const container = document.getElementById('submittedForms');
+//     container.innerHTML = '';
+
+//     if (submissions.length === 0) {
+//       container.innerHTML = `<p class="text-muted fst-italic">No submissions yet.</p>`;
+//       return;
+//     }
+
+//     submissions.forEach(sub => {
+//       const div = document.createElement('div');
+//       div.className = 'submitted-form';
+//       div.innerHTML = `
+//         <strong>Type:</strong> ${sub.type} Donation<br/>
+//         <strong>Date:</strong> ${new Date(sub.createdAt).toLocaleString()}<br/>
+//         <strong>Details:</strong><br/>
+//         <pre style="white-space: pre-wrap; font-family: inherit;">${JSON.stringify(sub.formData, null, 2)}</pre>
+//       `;
+//       container.appendChild(div);
+//     });
+//   } catch (err) {
+//     console.error(err);
+//     document.getElementById('submittedForms').innerHTML = '<p class="text-danger">Failed to load submissions.</p>';
+//   }
+// }
+
+
+  // Logout button functionality (customize as per your auth system)
+  document.getElementById('logoutBtn').addEventListener('click', () => {
+    alert('Logging out...');
+    // TODO: Add your logout logic here (clear session, redirect, etc.)
+    window.location.href = 'index.html'; // Example redirect after logout
+  });
+
+
+</script>
+
+</body>
+</html>

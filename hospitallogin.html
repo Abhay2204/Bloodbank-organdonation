@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hospital Login / Register</title>
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+  />
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="script.js"></script>
+</head>
+<body class="bg-light">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+        <div class="container">
+            <a class="navbar-brand text-danger fw-bold" href="index.html">🩸 Blood & Organ Donation</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link text-dark fw-semibold" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark fw-semibold" href="index.html#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark fw-semibold" href="donorlogin.html">Donor login</a></li>
+                    
+                    <li class="nav-item">
+                        <a class="btn btn-danger px-4 py-2 rounded-pill text-white fw-semibold ms-lg-3" href="hospitallogin.html">Login / Register</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+  <div class="container" style="padding-top: 100px;">
+    <div class="p-4 bg-white rounded-4 shadow-lg text-center">
+      <div class="mb-3">
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/3181/3181576.png"
+          alt="Hospital Icon"
+          width="80"
+        />
+      </div>
+      <h4 class="text-danger fw-bold">Hospitals: Join the Lifesaving Network!</h4>
+      <p class="text-muted mb-3">
+        By registering your hospital, you help connect patients with lifesaving blood
+        and organ donors faster and more efficiently.
+      </p>
+      <div
+        class="alert fw-semibold rounded-pill"
+        style="background-color: #ffe6e6; color: #990000;"
+      >
+        "Healthcare is a human right. Together, we save lives." – Unknown
+      </div>
+      <p class="text-muted">Thank you for being a beacon of hope ❤️</p>
+    </div>
+  </div>
+
+  <div class="container mt-5 pt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card shadow p-4">
+          <h3 class="text-center text-danger mb-4">Hospital Portal</h3>
+
+          <!-- Tabs -->
+          <ul class="nav nav-tabs mb-3" id="hospitalTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link active"
+                id="hospital-login-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#hospital-login"
+                type="button"
+                role="tab"
+                aria-controls="hospital-login"
+                aria-selected="true"
+              >
+                Login
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link"
+                id="hospital-register-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#hospital-register"
+                type="button"
+                role="tab"
+                aria-controls="hospital-register"
+                aria-selected="false"
+              >
+                Register
+              </button>
+            </li>
+          </ul>
+
+          <div class="tab-content" id="hospitalTabContent">
+            <!-- Login Form -->
+            <div
+              class="tab-pane fade show active"
+              id="hospital-login"
+              role="tabpanel"
+              aria-labelledby="hospital-login-tab"
+            >
+              <form id="hospitalLoginForm" novalidate>
+                <div class="mb-3">
+                  <label for="loginEmail" class="form-label">Gmail</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="loginEmail"
+                    name="email"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="loginPassword" class="form-label">Password</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="loginPassword"
+                    name="password"
+                    required
+                  />
+                </div>
+                <button type="submit" class="btn btn-danger w-100">Login</button>
+              </form>
+            </div>
+
+            <!-- Register Form -->
+            <div
+              class="tab-pane fade"
+              id="hospital-register"
+              role="tabpanel"
+              aria-labelledby="hospital-register-tab"
+            >
+              <form id="hospitalRegisterForm" novalidate>
+                <div class="mb-3">
+                  <label for="hospitalName" class="form-label">Hospital Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="hospitalName"
+                    name="hospitalName"
+                    required
+                  />
+                </div>
+
+                <div class="mb-3">
+                  <label for="regEmail" class="form-label">Gmail</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="regEmail"
+                    name="email"
+                    required
+                  />
+                </div>
+
+                <div class="mb-3">
+                  <label for="address" class="form-label">Address</label>
+                  <textarea
+                    class="form-control"
+                    id="address"
+                    name="address"
+                    rows="2"
+                    required
+                  ></textarea>
+                </div>
+
+                <div class="mb-3">
+                  <label for="regPassword" class="form-label">Password</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="regPassword"
+                    name="password"
+                    required
+                    minlength="6"
+                  />
+                </div>
+
+                <button type="submit" class="btn btn-danger w-100">Register</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer text-white py-4 bg-danger mt-5">
+    <div class="container text-center">
+      <div class="row">
+        <!-- Contact Info -->
+        <div class="col-md-4">
+          <h5 class="fw-bold">Contact Us</h5>
+          <p>Email: support@donationlife.com</p>
+          <p>Phone: +91 9876543210</p>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="col-md-4">
+          <h5 class="fw-bold">Quick Links</h5>
+          <ul class="list-unstyled">
+            <li><a href="#" class="text-white text-decoration-none">Home</a></li>
+            <li><a href="#" class="text-white text-decoration-none">About</a></li>
+            <li><a href="#" class="text-white text-decoration-none">Donate</a></li>
+            <li><a href="#" class="text-white text-decoration-none">Find Donors</a></li>
+          </ul>
+        </div>
+
+        <!-- Social Media -->
+        <div class="col-md-4">
+          <h5 class="fw-bold">Follow Us</h5>
+          <a href="#" class="text-white me-3"><i class="fab fa-facebook fa-lg"></i></a>
+          <a href="#" class="text-white me-3"><i class="fab fa-twitter fa-lg"></i></a>
+          <a href="#" class="text-white"><i class="fab fa-instagram fa-lg"></i></a>
+        </div>
+      </div>
+
+      <hr class="my-3 border-light" />
+
+      <!-- Copyright -->
+      <p class="mb-0">© 2025 Blood & Organ Donation | Saving Lives Together</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

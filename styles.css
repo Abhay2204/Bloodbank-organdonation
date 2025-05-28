@@ -1,0 +1,148 @@
+/* Navbar Styling */
+.navbar {
+    padding: 15px 0;
+    transition: all 0.3s ease-in-out;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+}
+
+.navbar-nav .nav-link {
+    font-size: 1.1rem;
+    padding: 8px 15px;
+    transition: color 0.3s ease-in-out;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #dc3545 !important;
+}
+
+/* Login/Register Button */
+.btn-danger {
+    font-size: 1rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-danger:hover {
+    background-color: #b22222;
+}
+
+/* Welcome Section */
+.welcome-section {
+    padding: 80px 0;
+    background-color: #ffffff;
+    text-align: center;
+}
+
+.welcome-section h1 {
+    font-size: 2.8rem;
+    margin-bottom: 15px;
+}
+
+.welcome-section p {
+    font-size: 1.2rem;
+}
+
+/* Cards */
+
+.card {
+    border: none;
+    border-radius: 12px;
+    transition: 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card img {
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+/* Buttons */
+.btn {
+    transition: 0.3s ease-in-out;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+.btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: #ffffff;
+}
+
+/* Heartbeat Animation */
+.heartbeat-line {
+    width: 1900px; /* Increased width */   
+    height: 3px; /* Increased thickness */
+    background: red;
+    margin: 20px auto;
+    position: relative;
+    animation: heartbeat 1.5s infinite;
+}
+
+
+@keyframes heartbeat {
+    0%, 100% { width: 100px; }
+    50% { width: 130px; }
+}
+/* About Section */
+.about-section {
+    background-color: #ffffff;
+    text-align: center;
+}
+
+.about-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.about-section p {
+    font-size: 1.2rem;
+}
+
+/* Cards */
+.card {
+    border: none;
+    border-radius: 12px;
+    transition: 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card img {
+    height: 220px;
+    object-fit: cover;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+/* Footer */
+.footer {
+    background-color: #dc3545;
+        margin-top: 50px;
+}
+
+.footer h5 {
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.footer p,
+.footer a {
+    font-size: 1rem;
+    opacity: 0.9;
+    transition: 0.3s ease-in-out;
+}
+
+.footer a:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
